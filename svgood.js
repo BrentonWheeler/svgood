@@ -1,5 +1,9 @@
 var fs = require('fs');
-var dir = process.env.NEW_DIR_NAME || './new-icons';
+if(process.env.ICON_SOURCE){
+	var dir = process.env.ICON_DESTINATION || process.env.ICON_SOURCE + '../new-icons';
+} else {
+	throw new Error("Please specify an ICON_SOURCE directory location from which to source .svg's")
+}
 
 function tryMakeDirRecursively(attempt){
 	const tempDir = dir + (attempt ? '-' + attempt : '');
