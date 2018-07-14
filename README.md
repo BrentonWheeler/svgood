@@ -10,3 +10,8 @@ You are REQUIRED to give a icon source directory via the node env variable ICON_
 
 Example usage:
 ICON_SOURCE="./gunky/designer/icons/" ICON_DESTINATION="./cool/developer/icons" node svgood.js
+
+# Future
+Planning to add 
+- Naming format changes, from camel case to snake, trimming spaces.
+- More granular control over what you remove from the svg files
