@@ -1,6 +1,6 @@
 {
   "name": "svgood",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Mass remove unwanted designer gunk from .svg files",
   "main": "svgood.js",
   "author": "Brenton Wheeler",
