@@ -12,7 +12,7 @@ function tryMakeDirRecursively(attempt){
 }
 
 function createBasicSvg(fileName, content){
-	// Regex
+	// Regexing
 	const shapeRegex = /<.*id="path-1".*>/
 	const defsRegex = /<defs((.|\n)*)<\/defs>/
 	const gRegex = /<g((.|\n)*)<\/g>\n/
@@ -37,16 +37,16 @@ function readFiles(dirname, onFileContent, onError) {
       return;
     }
     filenames.forEach(function(filename) {
-		if(filename.slice((filename.lastIndexOf(".") - 1 >>> 0) + 2) === 'svg'){
-			fs.readFile(dirname + filename, 'utf-8', function(err, content) {
-				if (err) {
-				onError(err);
-				return;
-				}
-				onFileContent(filename, content);
-			});
-		}
-	});
+			if(filename.slice((filename.lastIndexOf(".") - 1 >>> 0) + 2) === 'svg'){
+				fs.readFile(dirname + filename, 'utf-8', function(err, content) {
+					if (err) {
+						onError(err);
+						return;
+					}
+					onFileContent(filename, content);
+				});
+			}
+		});
   });
 }
 
