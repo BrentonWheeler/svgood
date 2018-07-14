@@ -4,5 +4,9 @@
   "description": "Mass remove unwanted designer gunk from .svg files",
   "main": "svgood.js",
   "author": "Brenton Wheeler",
+  "repository" :
+  { "type" : "git"
+  , "url" : "https://github.com/BrentonWheeler/svgood"
+  },
   "license": "MIT"
 }
