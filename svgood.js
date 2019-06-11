@@ -15,18 +15,22 @@ function tryMakeDirRecursively(attempt){
 	}
 }
 
-function createBasicSvg(fileName, content){
+function removeUnwantedContent(fileName, content){
 	// Regexing
 	const shapeRegex = /<.*id="path-1".*>/
 	const defsRegex = /<defs((.|\n)*)<\/defs>/
 	const gRegex = /<g((.|\n)*)<\/g>\n/
-	const path = content.match(shapeRegex)[0]
-	const defs = content.match(defsRegex)[0]
-	const g = content.match(gRegex)[0]
 
-	// Removing unwanted content
-	content = content.replace(g, '');
-	content = content.replace(defs, path);
+	const pathMatch = content.match(shapeRegex);
+	const defsMatch = content.match(defsRegex);
+	if (pathMatch && defsMatch) {
+		const gMatch = content.match(gRegex);
+		if (gMatch) {
+			content = content.replace(gMatch[0], '');
+			content = content.replace(defsMatch[0], pathMatch[0]);
+		}
+	}
+
 
 	// Creating a new svg with resulting content
 	fs.appendFile('./' + dir + '/' + fileName, content, function(err){
@@ -56,7 +60,7 @@ function readFiles(dirname, onFileContent, onError) {
 
 tryMakeDirRecursively(0);
 if(process.env.ICON_SOURCE){
-	readFiles(process.env.ICON_SOURCE, createBasicSvg, console.log);
+	readFiles(process.env.ICON_SOURCE, removeUnwantedContent, console.log);
 } else {
 	throw new Error("Please specify an ICON_SOURCE directory location from which to source .svg's")
 }
